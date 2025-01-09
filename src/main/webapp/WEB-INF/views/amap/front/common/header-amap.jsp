@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<%-- <c:set var="dest" scope="page" value="${tenancyAlias}/${userId}"/> --%>
 <div
 	class="container-fluid d-flex flex-row-reverse flex-md-row justify-content-between justify-content-md-evenly align-items-center">
 
@@ -84,7 +85,7 @@
 			<%-- 			</c:if> --%>
 			<c:if test="${not empty pageContext.request.userPrincipal}">
 				<a
-					href="<c:url value='/amap/${tenancyAlias}/{userId}/profile'/>">
+					href="<c:url value='/amap/${tenancyAlias}/account/my-profile'/>">
 					<i class="bi bi-person-circle fs-4 fc-300 fch-500"></i>
 				</a>
 			</c:if>
