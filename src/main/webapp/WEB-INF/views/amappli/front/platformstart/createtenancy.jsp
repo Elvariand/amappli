@@ -10,20 +10,16 @@
 <title>Création de votre espace AMAP</title>
 <link href="<c:url value='/resources/bootstrap/bootstrap.min.css'/>" rel="stylesheet">
 <link href="<c:url value='/resources/css/amappli/tenancycreation.css'/>" rel="stylesheet">
-<!-- Mapbox CSS -->
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+<!--  Mapbox CSS 
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" /> -->
 </head>
 <body class="theme-1 light bg-main fc-main">
-
-<header class="fc-main bg-main">
-	<jsp:include page="../../common/header.jsp" />
-</header>
 
 <section class="container justify-content-center">
     <!-- Conteneur pour la carte -->
     <div id="map"></div>
 
-    <div class="d-flex flex-column p-15 fc-main w-100 h-100">
+    <div class="fc-main d-flex flex-column p-15 fc-main w-100 h-100">
 
         <div class="title">
             <h1 class="pb-3">Faisons connaissance!</h1>
@@ -238,7 +234,7 @@
 
                     <div id="palette-choices" class="row g-3">
                         <c:forEach items="${colorPalettes}" var="palette" varStatus="status">
-                            <div class="col-12 col-md-6 col-lg-4 text-center">
+                            <div class="col-2 col-md-6 col-lg-2 text-center">
                                 <input type="radio" id="palette-${status.index + 1}" name="colorPalette" value="${palette}" />
                                 <label for="palette-${status.index+1}" class="palette-choices">
                                     <img src="<c:url value='/resources/img/palettes_samples/PALETTE${status.index + 1}.svg' />" class="palette-img"/>
@@ -267,15 +263,6 @@
                             </div>
                         </li>
                         <li class="d-flex align-items-center mb-3">
-                            <span class="me-auto p-2">Est-ce que vous souhaitez proposer des lots et des promos à vos adhérents?</span>
-                            <div class="d-flex">
-                                <input type="radio" value="true" name="question-2" class="btn-check" id="question-2-true" checked/>
-                                <label class="btn btn-quizz" for="question-2-true">Oui</label>
-                                <input type="radio" value="false" name="question-2" class="btn-check" id="question-2-false"/>
-                                <label class="btn btn-quizz" for="question-2-false">Non</label> 
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center mb-3">
                             <span class="me-auto p-2">Organisez-vous des ateliers que vous souhaiteriez mettre à disposition de vos adhérents sur ce site?</span>
                             <div class="d-flex">
                                 <input type="radio" value="true" name="question-3" class="btn-check" id="question-3-true" checked/>
@@ -284,16 +271,6 @@
                                 <label class="btn btn-quizz" for="question-3-false">Non</label> 
                             </div>
                         </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="form-part px-0 my-4">
-
-                <h3>Des paniers oui, mais quoi d'autre ?</h3>
-
-                <div class="mb-3">
-                    <ul class="list-unstyled">
                         <li class="d-flex align-items-center mb-3">
                             <span class="me-auto p-2">Voulez-vous activer le paiement en ligne ?</span>
                             <div class="d-flex">
@@ -305,7 +282,6 @@
                         </li>
                     </ul>
                 </div>
-
             </div>
 
             <div class="form-part px-0 my-4">
@@ -332,37 +308,8 @@
                                 <label class="btn btn-quizz" for="question-6-false">Non</label> 
                             </div>
                         </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="form-part px-0 my-4">
-
-                <h3>Des paniers oui, mais quoi d'autre ?</h3>
-
-                <div class="mb-3">
-                    <ul class="list-unstyled">
-                        <li class="d-flex align-items-center mb-3">
-                            <span class="me-auto p-2">Souhaitez-vous avoir la possibilité d’afficher des statistiques à partir de vos données?</span>
-                            <div class="d-flex">
-                                <input type="radio" value="true" name="question-7" class="btn-check" id="question-7-true" checked/>
-                                <label class="btn btn-quizz" for="question-7-true">Oui</label>
-                                <input type="radio" value="false" name="question-7" class="btn-check" id="question-7-false"/>
-                                <label class="btn btn-quizz" for="question-7-false">Non</label> 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="form-part px-0 my-4">
-
-                <h3>Des paniers oui, mais quoi d'autre ?</h3>
-
-                <div class="mb-3">
-                    <ul class="list-unstyled">
                         <li class="d-flex align-items-center">
-                            <span class="me-auto p-2">Souhaitez-vous améliorer le quotidien de vos adhérents en leur proposant des options de favoris, et la possibilité de choisir entre un thème dark et un thème light?</span>
+                            <span class="me-auto p-2">Souhaitez-vous améliorer le quotidien de vos adhérents en leur proposant la possibilité de choisir entre un thème dark et un thème light?</span>
                             <div class="d-flex">
                                 <input type="radio" value="true" name="question-8" id="question-8-true" class="btn-check" checked/>
                                 <label class="btn btn-quizz" for="question-8-true">Oui</label>
@@ -381,16 +328,12 @@
                 <br>
                 <br>
                 <br>
-                <br>
-                <br>
-                <br>
-                <br>
                 <div class="mb-3">
                     <ul class="row d-flex list-unstyled justify-content-around align-items-stretch">
                         <li class="col-12 col-md-4 d-flex pricing-list">
                             <form:radiobutton path="option" value="option-1" id="option-1" />
                             <label for="option-1" id="option-1-label" class="w-100 flex-fill d-flex flex-column">
-                                <div id="pricing-1" class="pricing flex-fill text-center py-3 px-2 rounded-5 align-content-between bg-300">
+                                <div id="pricing-1" class="pricing flex-fill text-center py-3 px-2 rounded-5 align-content-between bg-300 fc-900">
                                     <h2 class="h4 fw-bold">Potager</h2>
                                     <p classe="my-2">Site opérationnel avec les fonctionnalités de base</p>
                                     <h3 class="h5 fw-bold">Gratuit</h3>
@@ -400,7 +343,7 @@
                         <li class="col-12 col-md-4 d-flex pricing-list">
                             <form:radiobutton path="option" value="option-2" id="option-2"  />
                             <label for="option-2" id="option-2-label" class="w-100 flex-fill d-flex flex-column">
-                                <div id="pricing-2"	class="pricing flex-fill text-center py-3 px-2 rounded-5 align-content-between bg-400">
+                                <div id="pricing-2"	class="pricing flex-fill text-center py-3 px-2 rounded-5 align-content-between bg-400 fc-900">
                                 <h2 class="h4 fw-bold">Verger</h2>
                                 <p classe="my-2">Plus d'outils avancés pour personnaliser et enrichir votre
                                     site</p>
@@ -411,7 +354,7 @@
                         <li class="col-12 col-md-4 d-flex pricing-list">
                             <form:radiobutton path="option" value="option-3" id="option-3" />
                             <label for="option-3" id="option-3-label" class="w-100 flex-fill d-flex flex-column">
-                                <div id="pricing-3" class="pricing flex-fill text-center py-3 px-2 rounded-5 align-content-between bg-500">
+                                <div id="pricing-3" class="pricing flex-fill text-center py-3 px-2 rounded-5 align-content-between bg-500 fc-900">
                                     <h2 class="h4 fw-bold">Ferme</h2>
                                     <p classe="my-2">Toutes les fonctionnalités pour une gestion complète et
                                         professionnelle de votre AMAP</p>
@@ -441,13 +384,11 @@
     <script>
         const errorpresent = "${errorspresent}";
 	</script>
-	<footer class="fc-main bg-main fixed-bottom">
-		<jsp:include page="../../common/footer.jsp" />
-	</footer> 
     <script src="<c:url value='/resources/bootstrap/bootstrap.bundle.min.js'/>" type="text/javascript"></script>
     <script src="<c:url value='/resources/js/amappli/tenancycreation.js'/>" type="text/javascript"></script>
     <script	src="<c:url value='/resources/js/common/mapbox/mapbox-gl.js' />" type="text/javascript"></script>
 	<script	src="<c:url value='/resources/js/common/mapbox/map.js' />" type="text/javascript"></script>
-	<script src="<c:url value='/resources/js/common/theme-swap.js' />" type="text/javascript"></script> 
+	<script	src="<c:url value='/resources/js/common/headerless-theme-swap.js' />" type="text/javascript"></script>
+	<script	src="<c:url value='/resources/js/common/autofill.js' />" type="text/javascript"></script>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package isika.p3.amappli.service.amappli.impl;
 
 import java.io.IOException;
-// import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
@@ -10,10 +9,14 @@ import org.springframework.stereotype.Service;
 
 import isika.p3.amappli.entities.tenancy.HomePageContent;
 import isika.p3.amappli.api.NominatimAPI;
+import isika.p3.amappli.dto.amap.ContentBlockDTO;
 import isika.p3.amappli.dto.amap.TenancyUpdateAddressDTO;
 import isika.p3.amappli.dto.amap.TenancyUpdateColorFontDTO;
+import isika.p3.amappli.dto.amap.TenancyUpdateHomePageContentDTO;
 import isika.p3.amappli.dto.amap.TenancyUpdateLogo;
+import isika.p3.amappli.dto.amap.TenancyUpdateMemberShipFeePriceDTO;
 import isika.p3.amappli.dto.amap.TenancyUpdateNameAliasDTO;
+import isika.p3.amappli.dto.amap.TenancyUpdateOptionsDTO;
 import isika.p3.amappli.dto.amap.TenancyUpdatePickUpDTO;
 import isika.p3.amappli.dto.amap.TenancyUpdateSloganDTO;
 import isika.p3.amappli.dto.amappli.NewTenancyDTO;
@@ -24,6 +27,7 @@ import isika.p3.amappli.entities.tenancy.Options;
 import isika.p3.amappli.entities.tenancy.Tenancy;
 import isika.p3.amappli.entities.user.User;
 import isika.p3.amappli.exceptions.TenancyAliasAlreadyTakenException;
+import isika.p3.amappli.repo.amap.ContentBlockRepository;
 import isika.p3.amappli.repo.amap.UserRepository;
 import isika.p3.amappli.repo.amappli.TenancyRepository;
 import isika.p3.amappli.service.amappli.TenancyService;
@@ -37,13 +41,14 @@ public class TenancyServiceImpl implements TenancyService {
 
 	private final UserRepository userRepository;
 
+	private final ContentBlockRepository contentBlockRepository;
 
-	public TenancyServiceImpl(TenancyRepository tenancyRepository, UserRepository userRepository) {
+	public TenancyServiceImpl(TenancyRepository tenancyRepository, UserRepository userRepository, ContentBlockRepository contentBlockRepository) {
 		this.tenancyRepository = tenancyRepository;
 		this.userRepository = userRepository;
+		this.contentBlockRepository = contentBlockRepository;
 	}
-
-
+	
 	@Override
 	public HomePageContent getHomePageContentByTenancyId(Long id) {
 		Tenancy tenancy = tenancyRepository.findById(id).orElse(null);
@@ -82,20 +87,9 @@ public class TenancyServiceImpl implements TenancyService {
 		tenancyRepository.deleteById(id);
 	}
 
-	// Méthode pour charger une image depuis les ressources internes et la convertir
-	// en Base64
-	// private String loadImageFromResources(String imageName) throws IOException {
-	// 	InputStream imageStream = getClass().getClassLoader().getResourceAsStream("image/" + imageName);
-	// 	if (imageStream == null) {
-	// 		throw new IOException("Image not found in resources: " + imageName);
-	// 	}
-	// 	byte[] imageBytes = imageStream.readAllBytes();
-	// 	return Base64.getEncoder().encodeToString(imageBytes);
-	// }
-
 	@Transactional
 	@Override
-	public void createTenancyFromWelcomeForm(NewTenancyDTO newTenancyDTO, Long creatorUserId) {
+	public Tenancy createTenancyFromWelcomeForm(NewTenancyDTO newTenancyDTO, Long creatorUserId) {
 		Tenancy tenancy = new Tenancy();
 		
 		// Name
@@ -159,7 +153,7 @@ public class TenancyServiceImpl implements TenancyService {
 
 		}
 
-		options.addTenancy(tenancy);
+		//options.addTenancy(tenancy);
 		tenancy.setOptions(options);
 		// HomePageContent
 		HomePageContent homePageContent = new HomePageContent();
@@ -209,6 +203,7 @@ public class TenancyServiceImpl implements TenancyService {
 			User creator = userRepository.findById(creatorUserId).get();
 			creator.setTenancy(tenancy);
 			userRepository.save(creator);
+			return tenancy;
 		} catch (RuntimeException e) {
 			throw new TenancyAliasAlreadyTakenException("Cette url d'AMAP est déjà utilisée.");
 		}
@@ -290,4 +285,88 @@ public class TenancyServiceImpl implements TenancyService {
 		}
 	}
 
+	public void updateTenancyHomePageContent(TenancyUpdateHomePageContentDTO updateInfo, String alias){
+		Tenancy tenancy = tenancyRepository.findByTenancyAlias(alias).get();
+		HomePageContent homePageContent = tenancy.getHomePageContent();
+		// List<ContentBlock> contents = homePageContent.getContents();
+		for(ContentBlockDTO cbDTO : updateInfo.getContents()){
+			ContentBlock contentBlock;
+			if(cbDTO.getContentBlockId() != null){
+				contentBlock = contentBlockRepository.findById(cbDTO.getContentBlockId()).get();
+			}
+			else{
+				contentBlock = new ContentBlock();
+				contentBlock.setValue(false);
+			}
+			contentBlock.setContentTitle(cbDTO.getContentTitle());
+			contentBlock.setContentText(cbDTO.getContentText());
+			if (!cbDTO.getImage().isEmpty()) {
+				contentBlock.setContentImgName(cbDTO.getImage().getOriginalFilename());
+				contentBlock.setContentImgTypeMIME(cbDTO.getImage().getContentType());
+				try {
+					byte[] thebytes = cbDTO.getImage().getBytes();
+					contentBlock.setContentImg(Base64.getEncoder().encodeToString(thebytes));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			contentBlock.setHomePageContent(homePageContent);
+			contentBlockRepository.save(contentBlock);
+		}
+	}
+
+	public void updateTenancyValues(TenancyUpdateHomePageContentDTO updateInfo, String alias){
+		Tenancy tenancy = tenancyRepository.findByTenancyAlias(alias).get();
+		HomePageContent homePageContent = tenancy.getHomePageContent();
+		// List<ContentBlock> contents = homePageContent.getContents();
+		for(ContentBlockDTO cbDTO : updateInfo.getContents()){
+			ContentBlock contentBlock;
+			if(cbDTO.getContentBlockId() != null){
+				contentBlock = contentBlockRepository.findById(cbDTO.getContentBlockId()).get();
+			}
+			else{
+				contentBlock = new ContentBlock();
+				contentBlock.setValue(true);
+			}
+			contentBlock.setContentTitle(cbDTO.getContentTitle());
+			contentBlock.setContentText(cbDTO.getContentText());
+			if (!cbDTO.getImage().isEmpty()) {
+				contentBlock.setContentImgName(cbDTO.getImage().getOriginalFilename());
+				contentBlock.setContentImgTypeMIME(cbDTO.getImage().getContentType());
+				try {
+					byte[] thebytes = cbDTO.getImage().getBytes();
+					contentBlock.setContentImg(Base64.getEncoder().encodeToString(thebytes));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			contentBlock.setHomePageContent(homePageContent);
+			contentBlockRepository.save(contentBlock);
+		}
+	}
+
+	public void updateTenancyMemberShipFeePrice(TenancyUpdateMemberShipFeePriceDTO updateInfo, String alias){
+		Tenancy tenancy = tenancyRepository.findByTenancyAlias(alias).get();
+		if(tenancy != null){
+			tenancy.setMembershipFeePrice(updateInfo.getMembershipFeePrice());
+			tenancyRepository.save(tenancy);
+		}
+	}
+
+	public void updateTenancyOptions(TenancyUpdateOptionsDTO updateInfo, String alias){
+		Tenancy tenancy = tenancyRepository.findByTenancyAlias(alias).get();
+		if(tenancy != null){
+			if (updateInfo.getOption().equals("option-1")) {
+				tenancy.getOptions().setOption1Active(false);
+				tenancy.getOptions().setOption2Active(false);
+			} else if (updateInfo.getOption().equals("option-2")) {
+				tenancy.getOptions().setOption1Active(true);
+				tenancy.getOptions().setOption2Active(false);
+			} else if (updateInfo.getOption().equals("option-3")) {
+				tenancy.getOptions().setOption1Active(true);
+				tenancy.getOptions().setOption2Active(true);
+			}
+			tenancyRepository.save(tenancy);
+		}
+	}
 }

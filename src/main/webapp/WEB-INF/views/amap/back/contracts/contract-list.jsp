@@ -19,7 +19,6 @@ request.setAttribute("currentPage", currentPage);
 <link href="<c:url value='/resources/bootstrap/bootstrap-icons.min.css' />" rel="stylesheet">
 </head>
 <body class="row ${cssStyle} light ${font}-title ${font}-button">
-
 	<header class="fc-main bg-main border-1 border-alt">
 		<!-- Inclusion du header -->
 		<jsp:include page="../common/headerAdmin.jsp" />
@@ -61,7 +60,7 @@ request.setAttribute("currentPage", currentPage);
 						<h2 class="fw-bold fc-main my-auto">Liste des paniers</h2>
 						<a
 							href="<c:url value='/amap/${tenancyAlias}/admin/contracts/form'/>"
-							class="btn btn-outline-300 rounded-pill fch-main fw-bold border-2">
+							class="btn btn-outline-300 rounded-pill fch-100 fw-bold border-2">
 							<span class="icon">+ </span><span class=" d-none d-md-inline">Créer
 								un panier</span>
 						</a>

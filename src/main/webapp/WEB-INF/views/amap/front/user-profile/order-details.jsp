@@ -25,7 +25,6 @@ request.setAttribute("currentPage", currentPage);
 
 <body class="row ${cssStyle} light ${font}-title ${font}-button">
 
-
 	<header class="fc-main bg-main">
 		<jsp:include page="common/header-user-account.jsp" />
 	</header>
@@ -51,7 +50,7 @@ request.setAttribute("currentPage", currentPage);
 					<div id="order-details" class="fc-main">
 						<h3 class="fw-bold title">Commande n°${order.orderId}</h3>
 						<p><strong>Montant total :</strong> ${order.totalAmount}€</p>
-						<p><strong>Date de la commande :</strong> ${order.orderDate}</p>
+						<p><strong>Date de la commande :</strong> ${formattedDate}</p>
 						<p><strong>Etat</strong> : ${order.orderStatus.displayName}</p>
 						<p>
 							<strong>Type de Paiement :</strong>
@@ -117,12 +116,9 @@ request.setAttribute("currentPage", currentPage);
 
 	<script
 		src="<c:url value='/resources/js/common/mapbox/mapbox-gl.js' />"></script>
-	<script src="<c:url value='/resources/js/common/mapbox/map.js' />"
-		type="text/javascript"></script>
+	<script src="<c:url value='/resources/js/common/mapbox/map.js' />" type="text/javascript"></script>
 	<script src="<c:url value='/resources/js/common/theme-swap.js' />"></script>
-
-
-	<script src="<c:url value='/resources/js/amap/admin/bg-table.js' />"
-		type="text/javascript"></script>
+	<script src="<c:url value='/resources/js/amap/admin/bg-table.js' />" type="text/javascript"></script>
+	<script src="<c:url value='/resources/js/amap/admin/sidebar.js' />" type="text/javascript"></script>
 </body>
 </html>

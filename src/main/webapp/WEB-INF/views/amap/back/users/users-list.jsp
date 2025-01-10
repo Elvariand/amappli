@@ -18,7 +18,6 @@
 	<link href="<c:url value='/resources/bootstrap/bootstrap-icons.min.css' />" rel="stylesheet">
 </head>
 <body class="row ${cssStyle} light ${font}-title ${font}-button">
-
 	<header class="fc-main bg-main border-1 border-alt">
 	<!-- Inclusion du header -->
 			<jsp:include page="../common/headerAdmin.jsp" />
@@ -56,7 +55,7 @@
 					</div>
 					<div class="table-container d-flex justify-content-between align-items-center my-2">
 						<h2 class="fw-bold fc-main my-auto">Liste des adhérents</h2>
-						<a href="<c:url value='/amap/${tenancyAlias}/admin/users/form'/>" class="btn btn-outline-300 rounded-pill fch-main fw-bold border-2">
+						<a href="<c:url value='/amap/${tenancyAlias}/admin/users/form'/>" class="btn btn-outline-300 rounded-pill fch-100 fw-bold border-2">
 							<span class="icon">+ </span><span class=" d-none d-md-inline">Créer un adhérent</span>
 						</a>
 					</div>

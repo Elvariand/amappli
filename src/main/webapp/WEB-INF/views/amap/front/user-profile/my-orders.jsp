@@ -24,8 +24,6 @@ request.setAttribute("currentPage", currentPage);
 
 
 <body class="row ${cssStyle} light ${font}-title ${font}-button">
-
-
 	<header class="fc-main bg-main">
 		<jsp:include page="common/header-user-account.jsp" />
 	</header>
@@ -60,7 +58,7 @@ request.setAttribute("currentPage", currentPage);
 							<c:forEach var="order" items="${orders}">
 								<tr>
 									<td>${order.orderId}</td>
-									<td>${order.orderDate}</td>
+									<td>${formattedDate}</td>
 									<td>${order.totalAmount}€</td>
 									<td><c:if test="${order.orderPaid}">
 										<c:forEach var="payment" items="${order.payments}">${payment.paymentType.displayName} </c:forEach> 
@@ -97,8 +95,7 @@ request.setAttribute("currentPage", currentPage);
 		src="<c:url value='/resources/js/common/mapbox/mapbox-gl.js' />"></script>
 	<script src="<c:url value='/resources/js/common/mapbox/map.js' />" type="text/javascript"></script>
 	<script src="<c:url value='/resources/js/common/theme-swap.js' />"></script>
-	
-
+	<script src="<c:url value='/resources/js/amap/admin/sidebar.js' />" type="text/javascript"></script>
 	<script src="<c:url value='/resources/js/amap/admin/bg-table.js' />"
 		type="text/javascript"></script>
 </body>

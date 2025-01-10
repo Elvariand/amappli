@@ -12,18 +12,13 @@
 <link rel="icon" type="image/png"
 	href="<c:url value='/resources/img/icons/favicon-96x96.png'/>"
 	sizes="96x96" />
-<link rel="icon" type="image/svg+xml"
-	href="<c:url value='/resources/img/icons/favicon.svg'/>" />
-<link rel="shortcut icon"
-	href="<c:url value='/resources/img/icons/favicon.ico'/>" />
-<link rel="apple-touch-icon" sizes="180x180"
-	href="<c:url value='/resources/img/icons/apple-touch-icon.png'/>" />
-<link rel="manifest"
-	href="<c:url value='/resources/img/icons/site.webmanifest'/>" />
-<link rel="stylesheet"
-	href="<c:url value='/resources/bootstrap/bootstrap.min.css'/>" />
-<link rel="stylesheet"
-	href="<c:url value='/resources/css/amappli/homepage.css'/>" />
+<link rel="icon" type="image/svg+xml" href="<c:url value='/resources/img/icons/favicon.svg'/>" />
+<link rel="shortcut icon" href="<c:url value='/resources/img/icons/favicon.ico'/>" />
+<link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/resources/img/icons/apple-touch-icon.png'/>" />
+<link rel="manifest" href="<c:url value='/resources/img/icons/site.webmanifest'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/bootstrap/bootstrap.min.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/amappli/homepage.css'/>" />
+<link href="<c:url value='/resources/bootstrap/bootstrap-icons.min.css' />" rel="stylesheet">
 <!-- Mapbox CSS -->
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
 	rel="stylesheet" />
@@ -31,7 +26,7 @@
 </head>
 
 <body class="theme-1 dark bg-main">
-
+<div class="d-flex flex-column min-vh-100">
 	<header class="fc-main bg-main">
 		<jsp:include page="common/header.jsp" />
 	</header>
@@ -256,7 +251,8 @@
                     <img class="col-10 col-md-8 mx-auto d-block img-fluid"
                         src="<c:url value='/resources/img/logoterralocal.png' />" alt="GREENMAVEN Logo" />
                 </a>
-                <h6 class="fw-bold text-break">TERRALOCAL</h6>
+                <h4 class="fw-bold wrap">TERRALOCAL</h4>
+
             </div>
         </div>
         <!-- Partner 2 -->
@@ -267,7 +263,8 @@
                     <img class="col-10 col-md-8 mx-auto d-block img-fluid"
                         src="<c:url value='/resources/img/logoagrinov.png' />" alt="AGRINOV Logo" />
                 </a>
-                <h6 class="fw-bold text-break">AGRINOV</h6>
+                <h4 class="fw-bold wrap">AGRINOV</h4>
+
             </div>
         </div>
         <!-- Partner 3 -->
@@ -278,7 +275,8 @@
                     <img class="col-10 col-md-8 mx-auto d-block img-fluid"
                         src="<c:url value='/resources/img/logogroots.png' />" alt="GROOTS Logo" />
                 </a>
-                <h6 class="fw-bold text-break">GROOTS</h6>
+                <h4 class="fw-bold wrap">GROOTS</h4>
+
             </div>
         </div>
         <!-- Partner 4 -->
@@ -289,7 +287,8 @@
                     <img class="col-10 col-md-8 mx-auto d-block img-fluid"
                         src="<c:url value='/resources/img/logobiocoli.png' />" alt="BIOCOLI Logo" />
                 </a>
-                <h6 class="fw-bold text-break">BIOCOLI</h6>
+                <h4 class="fw-bold wrap">BIOCOLI</h4>
+
             </div>
         </div>
         <!-- Partner 5 -->
@@ -300,7 +299,7 @@
                     <img class="col-10 col-md-8 mx-auto d-block img-fluid"
                         src="<c:url value='/resources/img/logogreenmaven.png' />" alt="GREENMAVEN Logo" />
                 </a>
-                <h6 class="fw-bold text-break">GREENMAVEN</h6>
+                <h4 class="fw-bold wrap">GREENMAVEN</h4>
             </div>
         </div>
         <!-- Partner 6 -->
@@ -311,7 +310,8 @@
                     <img class="col-10 col-md-8 mx-auto d-block img-fluid"
                         src="<c:url value='/resources/img/logolacarottechantenay.png' />" alt="GREENMAVEN Logo" />
                 </a>
-                <h6 class="fw-bold text-break">LA CAROTTE CHANTENAY</h6>
+                <h6 class="fw-bold wrap">LA CAROTTE CHANTENAY</h6>
+
             </div>
         </div>
     </div>
@@ -321,7 +321,7 @@
 	<footer class="container-fluid fc-main bg-main">
 		<jsp:include page="common/footer.jsp" />
 	</footer>
-
+</div>
 
 	<script
 		src="<c:url value='/resources/bootstrap/bootstrap.bundle.min.js' />"
