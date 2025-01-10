@@ -68,7 +68,7 @@
                 <div class="col-12 col-md-6 col-lg-3 shadow-sm bg-100 rounded-3 p-3 mb-3">
                     <c:if test="${not empty block.contentImg}">
                         <!-- Affichage de l'image encodée en Base64 pour chaque ContentBlock -->
-                        <img class="object-fit-contain col-12"
+                        <img class="value-image object-fit-contain col-12"
                             src="data:${block.contentImgTypeMIME};base64,${block.contentImg}"
                             alt="${block.contentTitle}" class="value-image" />
                     </c:if>
